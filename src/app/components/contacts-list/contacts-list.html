@@ -1,0 +1,9 @@
+<div class="side-bar">
+  <h2>Contacts</h2>
+  <ul>
+    <li *ngFor="let contact of contacts" (click)="selectContact(contact)">
+      {{ contact.name }}
+    </li>
+  </ul>
+  <button class="add-contact" (click)="addContact()">+</button>
+</div>
