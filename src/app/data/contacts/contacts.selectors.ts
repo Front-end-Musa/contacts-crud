@@ -17,3 +17,8 @@ export const selectContactsEntities = createSelector(selectContactsState, select
 export const selectContactsStatus = createSelector(selectContactsState, (state) => state.status);
 
 export const selectContactsError = createSelector(selectContactsState, (state) => state.error);
+
+export const selectSelectedContact = createSelector(
+    selectContactsState,
+    (state) => state.selectedContactId ? state.entities[state.selectedContactId] : null
+)

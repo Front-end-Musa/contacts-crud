@@ -5,6 +5,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as contactsActions from './contacts.actions';
 
 export interface ContactsState extends EntityState<Contact> {
+  selectedContactId?: string | null;
   status: 'init' | 'loading' | 'loaded' | 'error' | string;
   error: null | string;
 }
@@ -24,22 +25,26 @@ export const contactsReducer = createReducer(
     status: 'loading',
     error: null,
   })),
-  on(contactsActions.loadContactsSuccess, (state, { contacts }) => entityAdapter.setAll(contacts, {
-    ...state,
-    status: 'loaded',
-    error: null,
-  })),
+  on(contactsActions.loadContactsSuccess, (state, { contacts }) =>
+    entityAdapter.setAll(contacts, {
+      ...state,
+      status: 'loaded',
+      error: null,
+    })
+  ),
   on(contactsActions.loadContactsFailure, (state, { error }) => ({
     ...state,
     status: 'error',
     error: error,
   })),
-  on(contactsActions.addContact, (state) => ({
-    ...state,
-    status: 'loading',
-    error: null,
-  })),
-  on(contactsActions.addContactSuccess, (state, { contact }) => entityAdapter.addOne(contact, {
+  on(contactsActions.addContact, (state, { contact }) =>
+    entityAdapter.addOne(contact, {
+      ...state,
+      status: 'loaded',
+      error: null,
+    })
+  ),
+  on(contactsActions.addContactSuccess, (state) => ({
     ...state,
     status: 'loaded',
     error: null,
@@ -48,6 +53,10 @@ export const contactsReducer = createReducer(
     ...state,
     status: 'error',
     error: error,
+  })),
+  on(contactsActions.selectContact, (state, { contactId }) => ({
+    ...state,
+    selectedContactId: contactId,
   }))
 );
 

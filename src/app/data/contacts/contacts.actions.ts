@@ -22,3 +22,8 @@ export const addContactFailure = createAction(
   '[Contacts/API] Add Contact Failure',
   props<{ error: string }>()
 );
+
+export const selectContact = createAction(
+  '[Contacts] Select Contact',
+  props<{ contactId: string }>()
+);

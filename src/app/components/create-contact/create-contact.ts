@@ -29,7 +29,11 @@ export class CreateContact {
 
   onSubmit() {
     if (this.contactForm.valid) {
-      const newContact: Contact = this.contactForm.value;
+      const newContact: Contact = {
+        name: this.contactForm.value.firstName,
+        lastName: this.contactForm.value.lastName,
+        phone: this.contactForm.value.phone,
+      };
       console.log('New Contact:', newContact);
       this.contactsFacade.addContact(newContact);
       this.contactForm.reset();

@@ -1,39 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactsFacade } from '../../data/contacts/contacts.facade';
 import { CommonModule, NgFor } from '@angular/common';
-import { PopupService } from '../../services/popup.service';
 import { CreateContact } from '../create-contact/create-contact';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { ContactDetails } from '../contact-details/contact-details';
 
 @Component({
   selector: 'app-contacts-list',
-  imports: [CommonModule],
+  imports: [CommonModule, ContactDetails],
   templateUrl: './contacts-list.html',
   styleUrl: './contacts-list.scss',
 })
 export class ContactsList implements OnInit {
-  contacts: Contact[] = [];
-  constructor(
-    private facade: ContactsFacade,
-    public popupService: PopupService,
-    private dialog: MatDialog
-  ) {}
+  contacts!: Observable<Contact[]>;
+  constructor(public facade: ContactsFacade, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.facade.getContacts();
-    this.facade.contacts$.subscribe((contacts) => {
-      console.log('contacts:', contacts, Array.isArray(contacts));
-      this.contacts = contacts;
-    });
-    console.log('contacts in component after subscribe:', this.contacts);
+    this.contacts = this.facade.contacts$;
+  }
+
+  ngOnDestroy() {
+    this.facade.contacts$.subscribe().unsubscribe();
   }
 
   selectContact(contact: Contact) {
-    this.facade.selectContact(contact.id);
+    this.facade.selectContact(contact.id!);
   }
 
   addContact() {
-    this.popupService.open();
     this.dialog.open(CreateContact);
     console.log('Add contact button clicked');
   }
