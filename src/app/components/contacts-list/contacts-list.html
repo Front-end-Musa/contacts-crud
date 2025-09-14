@@ -5,11 +5,7 @@
       <button class="add-contact" (click)="addContact()">+</button>
     </div>
     <div class="list">
-      <ul>
-        <li *ngFor="let contact of contacts | async" (click)="selectContact(contact)">
-          {{ contact.name }} {{ contact.lastName }}
-        </li>
-      </ul>
+      <app-users-list [contacts]="this.contacts"></app-users-list>
     </div>
   </div>
   <div class="main-content">

@@ -5,10 +5,11 @@ import { CreateContact } from '../create-contact/create-contact';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ContactDetails } from '../contact-details/contact-details';
+import { UsersList } from '../users-list/users-list';
 
 @Component({
   selector: 'app-contacts-list',
-  imports: [CommonModule, ContactDetails],
+  imports: [CommonModule, ContactDetails, UsersList],
   templateUrl: './contacts-list.html',
   styleUrl: './contacts-list.scss',
 })
@@ -23,10 +24,6 @@ export class ContactsList implements OnInit {
 
   ngOnDestroy() {
     this.facade.contacts$.subscribe().unsubscribe();
-  }
-
-  selectContact(contact: Contact) {
-    this.facade.selectContact(contact.id!);
   }
 
   addContact() {

@@ -1,0 +1,9 @@
+<ul>
+  <li
+    *ngFor="let contact of contacts | async"
+    (click)="selectContact(contact)"
+    class="contact-item"
+  >
+    {{ contact.name }} {{ contact.lastName }}
+  </li>
+</ul>

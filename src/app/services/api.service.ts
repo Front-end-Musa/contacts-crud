@@ -20,4 +20,9 @@ export class ApiService {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  deleteUser(contactId: string): Observable<void> {
+    const url = `${this.apiUrl}/${contactId}`;
+    return this.http.delete<void>(url);
+  }
 }

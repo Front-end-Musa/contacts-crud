@@ -37,18 +37,18 @@ export const contactsReducer = createReducer(
     status: 'error',
     error: error,
   })),
-  on(contactsActions.addContact, (state, { contact }) =>
+  on(contactsActions.addContact, (state) => ({
+    ...state,
+    status: 'loaded',
+    error: null,
+  })),
+  on(contactsActions.addContactSuccess, (state, { contact }) =>
     entityAdapter.addOne(contact, {
       ...state,
       status: 'loaded',
       error: null,
     })
   ),
-  on(contactsActions.addContactSuccess, (state) => ({
-    ...state,
-    status: 'loaded',
-    error: null,
-  })),
   on(contactsActions.addContactFailure, (state, { error }) => ({
     ...state,
     status: 'error',
@@ -57,6 +57,23 @@ export const contactsReducer = createReducer(
   on(contactsActions.selectContact, (state, { contactId }) => ({
     ...state,
     selectedContactId: contactId,
+  })),
+  on(contactsActions.deleteContact, (state) => ({
+    ...state,
+    status: 'loading',
+    error: null,
+  })),
+  on(contactsActions.deleteContactSuccess, (state, { contactId }) =>
+    entityAdapter.removeOne(contactId, {
+      ...state,
+      status: 'loaded',
+      error: null,
+    })
+  ),
+  on(contactsActions.deleteContactFailure, (state, { error }) => ({
+    ...state,
+    status: 'error',
+    error: error,
   }))
 );
 

@@ -1,0 +1,23 @@
+.delete-title {
+  text-align: left;
+  font-size: 25px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: end;
+
+  .delete {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+  }
+  .cancel {
+    background-color: gray;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+  }
+}

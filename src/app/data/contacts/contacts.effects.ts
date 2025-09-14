@@ -32,4 +32,15 @@ export class ContactsEffects {
       )
     )
   );
+
+  deleteContact$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contactsActions.deleteContact),
+      mergeMap(({ contactId }) =>
+        this.apiService.deleteUser(contactId).pipe(
+        map(() => contactsActions.deleteContactSuccess({ contactId })),
+          catchError((error) => of(contactsActions.deleteContactFailure({ error: error.message })))
+        )
+      ))
+  )
 }

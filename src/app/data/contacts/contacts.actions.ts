@@ -27,3 +27,18 @@ export const selectContact = createAction(
   '[Contacts] Select Contact',
   props<{ contactId: string }>()
 );
+
+export const deleteContact = createAction(
+  '[Contacts] Delete Contact',
+  props<{ contactId: string }>()
+)
+
+export const deleteContactSuccess = createAction(
+  '[Contacts] Delete Contact Success',
+  props<{ contactId: string }>()
+)
+
+export const deleteContactFailure = createAction(
+  '[Contacts/API] Delete Contact Failure',
+  props<{ error: string }>()
+)

@@ -1,0 +1,22 @@
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 8px;
+  height: 90vh;
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+
+    .delete-btn {
+      background: var(--mat-sys-on-surface-variant);
+      transform: translateY(-50%);
+      cursor: pointer;
+      border: none;
+      padding: 5px;
+    }
+  }
+}

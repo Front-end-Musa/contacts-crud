@@ -1,0 +1,7 @@
+<h3 class="delete-title" mat-dialog-title>
+  Delete {{ (this.facade.selectedContact$ | async)!.name }}?
+</h3>
+<div class="buttons" mat-dialog-actions>
+  <button class="delete" (click)="deleteContact()">Delete</button>
+  <button class="cancel" mat-dialog-close>Cancel</button>
+</div>

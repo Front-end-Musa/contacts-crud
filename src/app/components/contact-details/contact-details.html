@@ -1,8 +1,14 @@
 <div class="contact-container">
-    <h2>Contact Details</h2>
-    <div *ngIf="contact != null">
-        <p><strong>First Name:</strong> {{ contact.name }}</p>
-        <p><strong>Last Name:</strong> {{ contact.lastName }}</p>
-        <p><strong>Phone:</strong> {{ contact.phone }}</p>
-    </div>
+  <h2>Contact Details</h2>
+  <div *ngIf="contact != null" class="contact-details">
+    <p><strong>First Name:</strong> {{ contact.name }}</p>
+    <p><strong>Last Name:</strong> {{ contact.lastName }}</p>
+    <p><strong>Phone:</strong> {{ contact.phone }}</p>
+    <button class="delete-btn" (click)="openDeletePopup()">
+      <app-delete-btn></app-delete-btn>
+    </button>
+  </div>
+  <div *ngIf="contact == null">
+    <p>No contact selected.</p>
+  </div>
 </div>
